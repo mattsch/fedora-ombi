@@ -1,4 +1,4 @@
-FROM mattsch/fedora-rpmfusion:latest
+FROM mattsch/fedora-rpmfusion:25
 MAINTAINER Matthew Schick <matthew.schick@gmail.com>
 
 COPY tpokorra-mono-fedora.repo /etc/yum.repos.d/tpokorra-mono-fedora.repo
