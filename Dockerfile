@@ -20,28 +20,27 @@ RUN dnf install -yq curl \
 ENV LUID=1000 LGID=1000
 
 # Create the plexreqs user/group
-RUN groupadd -g $LGID plexreqs && \
-    useradd -c 'Plexrequestsnet User' -s /bin/bash -m -d /opt/PlexRequests \
-    -g $LGID -u $LUID plexreqs
+RUN groupadd -g $LGID ombi && \
+    useradd -c 'Ombi User' -s /bin/bash -m -d /opt/Ombi \
+    -g $LGID -u $LUID ombi
 
 # Grab the installer, do the thing
 RUN cd /tmp && \
     export URL=$(curl -qsX GET \
-        https://api.github.com/repos/tidusjar/PlexRequests.Net/releases/latest \
+        https://api.github.com/repos/tidusjar/Ombi/releases/latest \
         | awk '/browser_download_url/{print $4;exit}' FS='[""]') && \
     curl -qOL $URL && \
     cd /opt/ && \
-    unzip -q -d PlexRequests /tmp/PlexRequests.zip && \
-    rm /tmp/PlexRequests.zip && \
-    chown -R plexreqs:plexreqs /opt/PlexRequests
+    unzip -q -d Ombi /tmp/Ombi.zip && \
+    rm /tmp/Ombi.zip && \
+    chown -R ombi:ombi /opt/Ombi
 
 # Need a config and storage volume, expose proper port
 VOLUME /config
 EXPOSE 3579
 
 # Add script to copy default config if one isn't there and start plexreqs
-COPY run-plexreqs.sh /bin/
- 
-# Run our script
-CMD ["/bin/run-plexreqs.sh"]
+COPY run-ombi.sh /bin/
 
+# Run our script
+CMD ["/bin/run-ombi.sh"]
