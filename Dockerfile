@@ -1,8 +1,6 @@
 FROM mattsch/fedora-rpmfusion:latest
 MAINTAINER Matthew Schick <matthew.schick@gmail.com>
 
-COPY tpokorra-mono-fedora.repo /etc/yum.repos.d/tpokorra-mono-fedora.repo
-
 # Run updates
 RUN dnf upgrade -yq && \
     dnf clean all
