@@ -1,4 +1,4 @@
-FROM mattsch/fedora-rpmfusion:latest
+FROM mattsch/fedora-rpmfusion:26
 MAINTAINER Matthew Schick <matthew.schick@gmail.com>
 
 # Run updates
