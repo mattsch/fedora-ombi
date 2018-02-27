@@ -1,4 +1,4 @@
-FROM mattsch/fedora-rpmfusion:latest
+FROM mattsch/fedora-rpmfusion:27
 MAINTAINER Matthew Schick <matthew.schick@gmail.com>
 
 # Run updates
@@ -8,10 +8,11 @@ RUN dnf upgrade -yq && \
 # Install required packages
 RUN dnf install -yq curl \
                     mono-core \
+                    libicu \
+                    libunwind \
                     procps-ng \
-                    sqlite \
                     shadow-utils \
-                    unzip && \
+                    tar && \
     dnf clean all
 
 # Set uid/gid (override with the '-e' flag), 1000/1000 used since it's the
@@ -25,18 +26,17 @@ RUN groupadd -g $LGID ombi && \
 
 # Grab the installer, do the thing
 RUN cd /tmp && \
-    export URL=$(curl -qsX GET \
-        https://api.github.com/repos/tidusjar/Ombi/releases/latest \
-        | awk '/browser_download_url/{print $4;exit}' FS='[""]') && \
-    curl -qOL $URL && \
-    cd /opt/ && \
-    unzip -q -d Ombi /tmp/Ombi.zip && \
-    rm /tmp/Ombi.zip && \
+    curl -sOL \
+        https://github.com/tidusjar/Ombi/releases/download/Ombi-v3.0.2881/linux.tar.gz && \
+    mkdir -p /opt/Ombi && \
+    cd /opt/Ombi && \
+    tar xf /tmp/linux.tar.gz && \
+    rm /tmp/linux.tar.gz && \
     chown -R ombi:ombi /opt/Ombi
 
 # Need a config and storage volume, expose proper port
 VOLUME /config
-EXPOSE 3579
+EXPOSE 5000
 
 # Add script to copy default config if one isn't there and start plexreqs
 COPY run-ombi.sh /bin/
