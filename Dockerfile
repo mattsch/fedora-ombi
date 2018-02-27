@@ -10,6 +10,7 @@ RUN dnf install -yq curl \
                     mono-core \
                     procps-ng \
                     sqlite \
+                    shadow-utils \
                     unzip && \
     dnf clean all
 
