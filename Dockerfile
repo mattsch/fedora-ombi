@@ -25,13 +25,11 @@ RUN groupadd -g $LGID ombi && \
     -g $LGID -u $LUID ombi
 
 # Grab the installer, do the thing
-RUN cd /tmp && \
-    curl -sOL \
-        https://github.com/tidusjar/Ombi/releases/download/Ombi-v3.0.2881/linux.tar.gz && \
-    mkdir -p /opt/Ombi && \
+RUN mkdir -p /opt/Ombi && \
     cd /opt/Ombi && \
-    tar xf /tmp/linux.tar.gz && \
-    rm /tmp/linux.tar.gz && \
+    curl -sL -o - \
+        https://github.com/tidusjar/Ombi/releases/download/Ombi-v3.0.2881/linux.tar.gz \
+        | tar xzf - && \
     chown -R ombi:ombi /opt/Ombi
 
 # Need a config and storage volume, expose proper port
