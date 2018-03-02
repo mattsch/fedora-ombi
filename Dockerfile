@@ -28,7 +28,7 @@ RUN groupadd -g $LGID ombi && \
 RUN mkdir -p /opt/Ombi && \
     cd /opt/Ombi && \
     curl -sL -o - \
-        https://github.com/tidusjar/Ombi/releases/download/Ombi-v3.0.2948/linux.tar.gz \
+        https://github.com/tidusjar/Ombi/releases/download/Ombi-v3.0.2881/linux.tar.gz \
         | tar xzf - && \
     chown -R ombi:ombi /opt/Ombi
 
