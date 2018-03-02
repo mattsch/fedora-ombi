@@ -2,9 +2,11 @@ sudo: required
 services:
   - docker
 
+env:
+  - IMG_NAME="docker.io/mattsch/fedora-ombi"
 script:
   - 'docker login -u "$D_U" -p "$D_P"'
-  - 'docker build --build-arg upstream_tag=${TRAVIS_TAG} -t docker.io/mattsch/fedora-ombi:${TRAVIS_TAG} .'
-  - 'docker push'
+  - 'docker build --build-arg upstream_tag=${TRAVIS_TAG} -t ${IMG_NAME}:${TRAVIS_TAG/v} .'
+  - 'docker push ${IMG_NAME}:${TRAVIS_TAG/v}'
 
 if: tag IS present
