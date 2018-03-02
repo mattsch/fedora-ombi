@@ -1,0 +1,10 @@
+sudo: required
+services:
+  - docker
+
+script:
+  - 'docker login -u "$D_U" -p "$D_P"'
+  - 'docker build --build-arg upstream_tag=${TRAVIS_TAG} -t docker.io/mattsch/fedora-ombi:${TRAVIS_TAG} .'
+  - 'docker push'
+
+if: tag IS present
