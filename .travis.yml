@@ -6,7 +6,8 @@ env:
   - IMG_NAME="docker.io/mattsch/fedora-ombi"
 script:
   - 'docker login -u "$D_U" -p "$D_P"'
-  - 'docker build --build-arg upstream_tag=${TRAVIS_TAG} -t ${IMG_NAME}:${TRAVIS_TAG/v} .'
+  - 'docker build --build-arg upstream_tag=${TRAVIS_TAG} -t ${IMG_NAME}:${TRAVIS_TAG/v} -t ${IMG_NAME}:latest .'
   - 'docker push ${IMG_NAME}:${TRAVIS_TAG/v}'
+  - 'docker push ${IMG_NAME}:latest'
 
 if: tag IS present
