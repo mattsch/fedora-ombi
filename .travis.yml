@@ -1,13 +1,16 @@
+language: generic
 sudo: required
 services:
-  - docker
+- docker
 
 env:
+  global:
   - IMG_NAME="docker.io/mattsch/fedora-ombi"
+  - VERS="v3.0.2970"
 script:
   - 'docker login -u "$D_U" -p "$D_P"'
-  - 'docker build --build-arg upstream_tag=${TRAVIS_TAG} -t ${IMG_NAME}:${TRAVIS_TAG/v} -t ${IMG_NAME}:latest .'
-  - 'docker push ${IMG_NAME}:${TRAVIS_TAG/v}'
+  - 'docker build --build-arg upstream_tag=${VER} -t ${IMG_NAME}:${VER/v} -t ${IMG_NAME}:latest .'
+  - 'docker push ${IMG_NAME}:${VER/v}'
   - 'docker push ${IMG_NAME}:latest'
 
-if: tag IS present
+if: branch = master

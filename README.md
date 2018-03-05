@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/mattsch/fedora-ombi.svg?branch=master)](https://travis-ci.org/mattsch/fedora-ombi)
 # Fedora Ombi Docker Container
 
 Docker container for [Ombi](https://www.ombi.io/) using Fedora.
