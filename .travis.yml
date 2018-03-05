@@ -6,7 +6,8 @@ services:
 env:
   global:
   - IMG_NAME="docker.io/mattsch/fedora-ombi"
-  - VERS="v3.0.2970"
+  - VER="v3.0.2970"
+
 script:
   - 'docker login -u "$D_U" -p "$D_P"'
   - 'docker build --build-arg upstream_tag=${VER} -t ${IMG_NAME}:${VER/v} -t ${IMG_NAME}:latest .'
