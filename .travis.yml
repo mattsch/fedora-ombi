@@ -6,7 +6,7 @@ services:
 env:
   global:
   - IMG_NAME="docker.io/mattsch/fedora-ombi"
-  - VER="v3.0.3030"
+  - VER="v3.0.3111"
 
 script:
   - 'docker login -u "$D_U" -p "$D_P"'
