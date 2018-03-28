@@ -1,14 +1,14 @@
 FROM mattsch/fedora-rpmfusion:27
 MAINTAINER Matthew Schick <matthew.schick@gmail.com>
-ARG upstream_tag=v3.0.2881
+ARG upstream_tag=v3.0.3111
 
 # Run updates
 RUN dnf upgrade -yq && \
     dnf clean all
 
 # Install required packages
-RUN dnf install -yq curl \
-                    mono-core \
+RUN dnf install -yq compat-openssl10 \
+                    curl \
                     libicu \
                     libunwind \
                     procps-ng \
